@@ -22,8 +22,7 @@ open FSharpKoans.Core
 // The following function will convert a comma separated string
 // into an array of the column values.
 //                       
-// let splitCommas (x:string) =
-//     x.Split([|','|])
+
 //---------------------------------------------------------------
 [<Koan(Sort = 15)>]
 module ``about the stock example`` =
@@ -60,6 +59,10 @@ module ``about the stock example`` =
 
     [<Koan>]
     let YouGotTheAnswerCorrect() =
-        let result =  __
+        let result =  
+            stockData
+                |> List.map (fun x -> x.Split([|','|]))
+                |> List.tail
+                |> List.maxBy (fun x -> abs(System.Double.Parse(x.[1]) - System.Double.Parse(x.[4])))  
         
-        AssertEquality "2012-03-13" result
+        AssertEquality "2012-03-13" result.[0]
